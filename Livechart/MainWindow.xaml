@@ -1,0 +1,21 @@
+﻿<Window x:Class="Livechart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid
+                    
+                         x:Name="onpie" Margin="0,0,10,0">
+
+
+            <lvc:PieChart Series="{Binding SeriesCollection}" Cursor="Hand" LegendLocation="Left" InnerRadius="130" Hoverable="True"></lvc:PieChart>
+            <Button Click="Button_Click" Content="View" HorizontalAlignment="Left" Margin="18,31,0,0" VerticalAlignment="Top" Width="102" Height="45" />
+
+
+        </Grid>
+    </Grid>
+</Window>
