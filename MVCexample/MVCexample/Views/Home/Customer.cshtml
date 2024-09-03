@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Customer";
+}
+@model MVCexample.Models.CustomerSupport
+
+<div class="text-center">
+    <h1 class="display-4">Customer support</h1>
+</div>
+
+
+<form asp-action="Customer" method="post">
+    
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" style="width: 300px;"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" style="width: 300px;"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="IssueType"></label>
+        <select asp-for="IssueType" class="form-control" style="width: 300px;">
+            <option value="Technical">Technical</option>
+            <option value="Billing">Billing</option>
+            <option value="General Inquiry">General Inquiry</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="4" style="width: 300px;"></textarea>
+    </div>
+
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit Issue</button>
+    </div>
+</form>
+
+
+<div style="margin: 20px;">
+    <!-- Name -->
+    <div style="margin-bottom: 10px;">
+        <label for="Name" style="font-size: 14px;">Name:</label><br />
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", style = "width: 300px;" })
+    </div>
+
+    <!-- Email -->
+    <div style="margin-bottom: 10px;">
+        <label for="Email" style="font-size: 14px;">Email:</label><br />
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", style = "width: 300px;" })
+    </div>
+
+    <!-- Issue Type -->
+    <div style="margin-bottom: 10px;">
+        <label for="IssueType" style="font-size: 14px;">Issue Type:</label><br />
+        @Html.DropDownListFor(m => m.IssueType, new SelectList(new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Technical", Value = "Technical" },
+            new SelectListItem { Text = "Billing", Value = "Billing" },
+            new SelectListItem { Text = "General Inquiry", Value = "General Inquiry" }
+        }), "Select an issue type", new { @class = "form-control", style = "width: 300px;" })
+    </div>
+
+    <!-- Description -->
+    <div style="margin-bottom: 20px;">
+        <label for="Description" style="font-size: 14px;">Description:</label><br />
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", style = "width: 300px; height: 100px;", @rows = "5" })
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+        <input type="submit" value="Submit" class="btn btn-primary" style="width: 100px;" />
+    </div>
+</div>
