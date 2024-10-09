@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ST10369554_PROG6212_POE.Models.Claim>
+
+@{
+    ViewBag.Title = "Pending Approvals";
+}
+//test
+<h2>Pending Approvals</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lecturer</th>
+            <th>Date</th>
+            <th>Hours Worked</th>
+            <th>Work Type</th>
+            <th>Programme</th>
+            <th>Module Code</th>
+            <th>Groups</th>
+            <th>Hourly Rate</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.LecturerId</td>
+                <td>@claim.ClaimDate.ToShortDateString()</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.WorkType</td>
+                <td>@claim.Programme</td>
+                <td>@claim.ModuleCode</td>
+                <td>@claim.Groups</td>
+                <td>@claim.HourlyRate</td>
+                <td>@claim.Total</td>
+                <td>
+                    @Html.ActionLink("Approve", "Approve", new { id = claim.ClaimId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Reject", "Approve", new { id = claim.ClaimId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

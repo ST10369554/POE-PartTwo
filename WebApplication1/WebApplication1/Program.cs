@@ -1,15 +1,8 @@
-using EmployeeApp.Data;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<EmployeeContext>(options =>
-{
-    var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseSqlServer(connection);
-});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +22,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Employees}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

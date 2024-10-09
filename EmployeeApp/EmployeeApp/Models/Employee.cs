@@ -21,9 +21,9 @@ namespace EmployeeApp.Models
         public string Email {  get; set; }
 
         [Required]
-        [Phone]
+        
         [StringLength(50)]
-        public int Phone {  get; set; }
+        public string Phone {  get; set; }
 
         [Required]
         public DateTime HireDate {  get; set; }

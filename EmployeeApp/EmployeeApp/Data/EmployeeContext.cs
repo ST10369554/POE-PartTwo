@@ -1,5 +1,4 @@
 ﻿using EmployeeApp.Models;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeApp.Data
@@ -11,5 +10,6 @@ namespace EmployeeApp.Data
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department> Departments { get; set; }
     }
 }

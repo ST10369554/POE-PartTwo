@@ -1,0 +1,61 @@
+﻿@model ST10369554_PROG6212_POE.Models.Claim
+
+@{
+    ViewBag.Title = "Submit Claim";
+}
+
+<h2>Submit Claim</h2>
+
+<form  asp-action="SubmitClaim" method="post">
+
+    <div class="form-group">
+        <label asp-for="LecturerId"></label>
+        <input asp-for="LecturerId" class="form-control" style="width: 200px;" />
+        <span asp-validation-for="LecturerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClaimDate"></label>
+        <input asp-for="ClaimDate" class="form-control" style="width: 400px;" />
+        <span asp-validation-for="ClaimDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HoursWorked"></label>
+        <input asp-for="HoursWorked" class="form-control" style="width: 400px;" />
+        <span asp-validation-for="HoursWorked" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WorkType"></label>
+        <input asp-for="WorkType" class="form-control" style="width: 400px;"/>
+        <span asp-validation-for="WorkType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Programme"></label>
+        <input asp-for="Programme" class="form-control" style="width: 400px;"/>
+        <span asp-validation-for="Programme" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ModuleCode"></label>
+        <input asp-for="ModuleCode" class="form-control" style="width: 400px;"/>
+        <span asp-validation-for="ModuleCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Groups"></label>
+        <input asp-for="Groups" class="form-control" style="width: 400px;"/>
+        <span asp-validation-for="Groups" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HourlyRate"></label>
+        <input asp-for="HourlyRate" class="form-control" style="width: 400px;"/>
+        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SupportingDocumentPath" class="control-label"></label>
+        <input asp-for="SupportingDocumentPath" type="file" />
+        <span asp-validation-for="SupportingDocumentPath" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit Claim" class="btn btn-primary" />
+    </div>
+</form>
+

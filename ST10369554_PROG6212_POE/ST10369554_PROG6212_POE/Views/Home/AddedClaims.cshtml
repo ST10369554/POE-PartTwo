@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ST10369554_PROG6212_POE.Models.Claim>
+
+@{
+    ViewBag.Title = "Added Claims";
+}
+
+<h2>Added Claims</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Hours Worked</th>
+            <th>Work Type</th>            
+            <th>Programme</th>
+            <th>Module Code</th>
+            <th>Groups</th>
+            <th>Hourly Rate</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Manager Feedback</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.ClaimDate.ToShortDateString()</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.WorkType</td>
+                <td>@claim.Programme</td>
+                <td>@claim.ModuleCode</td>
+                <td>@claim.Groups</td>
+                <td>@claim.HourlyRate</td>
+                <td>@claim.Total</td>
+                <td>@claim.Status</td>
+                <td>@claim.ManagerFeedback</td>
+            </tr>
+        }
+    </tbody>
+</table>

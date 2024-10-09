@@ -25,19 +25,19 @@ namespace ST10369554_PROG6212_POE.Controllers
 
          private static List<Claim> claims = new List<Claim>();
 
-            // GET: Claim/Create
+            // GET: Claim/Submit Claim
             public ActionResult SubmitClaim()
             {
                 return View();
             }
 
-            // POST: Claim/Create
+            // POST: Claim/Submit Claim
             [HttpPost]
             public ActionResult SubmitClaim(Claim claim)
             {
                 if (ModelState.IsValid)
                 {
-                    claim.Id = claims.Count + 1;
+                    claim.ClaimId = claims.Count + 1;
                     claim.Status = ClaimStatus.Submitted;
                     claims.Add(claim);
 
@@ -47,7 +47,7 @@ namespace ST10369554_PROG6212_POE.Controllers
                 return View(claim);
             }
 
-            // GET: Claim/MyClaims
+            // GET: Claim/AddedClaims
             public ActionResult AddedClaims()
             {
                 var lecturerClaims = claims.Where(c => c.LecturerId == User.Identity.Name).ToList();
@@ -57,7 +57,7 @@ namespace ST10369554_PROG6212_POE.Controllers
             // GET: Claim/Approve
             public ActionResult Approve(int id)
             {
-                var claim = claims.FirstOrDefault(c => c.Id == id);
+                var claim = claims.FirstOrDefault(c => c.ClaimId == id);
                 return View(claim);
             }
 
@@ -65,11 +65,11 @@ namespace ST10369554_PROG6212_POE.Controllers
             [HttpPost]
             public ActionResult Approve(int id, string managerComments, bool approve)
             {
-                var claim = claims.FirstOrDefault(c => c.Id == id);
+                var claim = claims.FirstOrDefault(c => c.ClaimId == id);
 
                 if (claim != null)
                 {
-                    claim.ManagerComments = managerComments;
+                    claim.ManagerFeedback = managerComments;
                     claim.Status = approve ? ClaimStatus.Approved : ClaimStatus.Rejected;
 
                     return RedirectToAction("ApprovalPending");
@@ -79,7 +79,7 @@ namespace ST10369554_PROG6212_POE.Controllers
             }
 
             // GET: Claim/PendingApprovals
-            public ActionResult PendingApprovals()
+            public ActionResult ApprovalPending()
             {
                 var pendingClaims = claims.Where(c => c.Status == ClaimStatus.Submitted).ToList();
                 return View(pendingClaims);

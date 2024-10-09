@@ -4,7 +4,7 @@ namespace ST10369554_PROG6212_POE.Models
 {
     public class Claim
     {
-        public int Id { get; set; }
+        public int ClaimId { get; set; }
 
         [Required]
         public string LecturerId { get; set; }
@@ -18,12 +18,17 @@ namespace ST10369554_PROG6212_POE.Models
 
         [Required]
         public string WorkType { get; set; }
-
+        public string Programme { get; set; }
+        public string ModuleCode { get; set; }
+        public int Groups {  get; set; }
+        public decimal HourlyRate { get; set; }
+        public decimal Total {  get; set; }
+        public decimal GrandTotal { get; set; }
         public string SupportingDocumentPath { get; set; }
 
         public ClaimStatus Status { get; set; }
 
-        public string ManagerComments { get; set; }
+        public string ManagerFeedback { get; set; }
     }
 
     public enum ClaimStatus
