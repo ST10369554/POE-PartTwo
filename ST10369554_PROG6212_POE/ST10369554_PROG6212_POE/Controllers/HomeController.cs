@@ -47,7 +47,7 @@ namespace ST10369554_PROG6212_POE.Controllers
                 return View(claim);
             }
 
-            // GET: Claim/AddedClaims
+            // GET: Claim/AddedClaims gdfdg
             public ActionResult AddedClaims()
             {
                 var lecturerClaims = claims.Where(c => c.LecturerId == User.Identity.Name).ToList();
