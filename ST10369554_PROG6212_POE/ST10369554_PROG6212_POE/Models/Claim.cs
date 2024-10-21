@@ -32,7 +32,7 @@ namespace ST10369554_PROG6212_POE.Models
         public decimal GrandTotal { get; set; }
         public string SupportingDocumentPath { get; set; }
 
-        public ClaimStatus Status { get; set; }
+        public int StatusId { get; set; }
 
         public string ManagerFeedback { get; set; }
     }

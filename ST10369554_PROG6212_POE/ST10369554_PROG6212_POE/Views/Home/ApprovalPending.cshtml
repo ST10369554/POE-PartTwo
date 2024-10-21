@@ -36,7 +36,7 @@
                 <td>@claim.Total</td>
                 <td>
                     @Html.ActionLink("Approve", "Approve", new { id = claim.ClaimId }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Reject", "Approve", new { id = claim.ClaimId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Reject", "Approve", new { id = claim.ClaimId, approve = false }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

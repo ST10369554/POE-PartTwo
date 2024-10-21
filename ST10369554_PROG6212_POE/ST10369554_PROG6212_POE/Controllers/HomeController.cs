@@ -59,7 +59,7 @@ namespace ST10369554_PROG6212_POE.Controllers
                     }
                 }
                     claim.ClaimId = claims.Count + 1;
-                    claim.Status = ClaimStatus.Submitted;
+                    claim.StatusId = 1;// Set StatusId to 'submitted' (pending)
                     claim.Total = claim.HoursWorked * claim.HourlyRate;
                     claim.GrandTotal = claim.Total;
                     claim.ClaimDate = DateTime.Now;
@@ -94,7 +94,7 @@ namespace ST10369554_PROG6212_POE.Controllers
                 if (claim != null)
                 {
                     claim.ManagerFeedback = managerComments;
-                    claim.Status = approve ? ClaimStatus.Approved : ClaimStatus.Rejected;
+                    claim.StatusId = approve ? 2 : 3; // 2 = approved, 3 = Rejected
 
                     return RedirectToAction("ApprovalPending");
                 }
@@ -105,7 +105,7 @@ namespace ST10369554_PROG6212_POE.Controllers
             // GET: Claim/PendingApprovals
             public ActionResult ApprovalPending()
             {
-                var pendingClaims = claims.Where(c => c.Status == ClaimStatus.Submitted).ToList();
+                var pendingClaims = claims.Where(c => c.StatusId == 1).ToList(); //StatusId = 1 means its 'Pending'
                 return View(pendingClaims);
             }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
