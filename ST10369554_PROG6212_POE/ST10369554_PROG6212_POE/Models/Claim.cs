@@ -37,11 +37,4 @@ namespace ST10369554_PROG6212_POE.Models
         public string ManagerFeedback { get; set; }
     }
 
-    public enum ClaimStatus
-    {
-        Submitted,
-        Pending,
-        Approved,
-        Rejected
-    }
     }
