@@ -1,3 +1,4 @@
+using AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ST10369554_PROG6212_POE.Models;
 using System.Diagnostics;
@@ -25,7 +26,7 @@ namespace ST10369554_PROG6212_POE.Controllers
 
          private static List<Claim> claims = new List<Claim>();
 
-            // GET: Claim/Submit Claim
+        // GET: Claim/Submit Claim
             public ActionResult SubmitClaim()
             {
                 return View();
@@ -33,21 +34,44 @@ namespace ST10369554_PROG6212_POE.Controllers
 
             // POST: Claim/Submit Claim
             [HttpPost]
-            public ActionResult SubmitClaim(Claim claim)
+            public async Task<ActionResult> SubmitClaim(Claim claim, IFormFile supportingDocument)
             {
                 if (ModelState.IsValid)
                 {
+                //Save uploaded file
+                if (supportingDocument != null && supportingDocument.Length > 0)
+                {
+                    var allowedExtensions = new[] { ".pdf", ".docx", "xlsx" };
+                    var extension = Path.GetExtension(supportingDocument.FileName);
+                    if (allowedExtensions.Contains(extension.ToLower()) && supportingDocument.Length < 5 * 1024 * 1024)// 5 MB size limit
+                    { 
+                        var path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/uploads", supportingDocument.FileName);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await supportingDocument.CopyToAsync(stream);
+                        }
+                        claim.SupportingDocumentPath = "/uploads/" + supportingDocument.FileName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid file type or size.");
+                        return View(claim);
+                    }
+                }
                     claim.ClaimId = claims.Count + 1;
                     claim.Status = ClaimStatus.Submitted;
-                    claims.Add(claim);
+                    claim.Total = claim.HoursWorked * claim.HourlyRate;
+                    claim.GrandTotal = claim.Total;
+                    claim.ClaimDate = DateTime.Now;
 
+                    claims.Add(claim);
                     return RedirectToAction("AddedClaims");
                 }
 
                 return View(claim);
             }
 
-            // GET: Claim/AddedClaims gdfdg
+            // GET: Claim/AddedClaims
             public ActionResult AddedClaims()
             {
                 var lecturerClaims = claims.Where(c => c.LecturerId == User.Identity.Name).ToList();

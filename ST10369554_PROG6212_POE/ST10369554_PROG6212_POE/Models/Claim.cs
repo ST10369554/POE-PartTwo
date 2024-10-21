@@ -8,6 +8,12 @@ namespace ST10369554_PROG6212_POE.Models
 
         [Required]
         public string LecturerId { get; set; }
+        public string LecturerName { get; set; }
+        public string LecturerSurname { get; set; }
+
+        public string ManagerId { get; set; }
+        public string ManegerName { get; set; }
+        public string ManagerSurname { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -38,21 +44,4 @@ namespace ST10369554_PROG6212_POE.Models
         Approved,
         Rejected
     }
-
-    public class Lecturer
-    {
-        public string LecturerId { get; set; }
-        public string LecturerName { get; set; }
-        public string LecturerSurname { get; set; }
-    }
-
-    public class Manager
-    {
-        public string ManagerId { get; set; }
-        public string ManegerName { get; set; }
-        public string ManagerSurname { get; set; }
-    }
-   
-
-
     }
