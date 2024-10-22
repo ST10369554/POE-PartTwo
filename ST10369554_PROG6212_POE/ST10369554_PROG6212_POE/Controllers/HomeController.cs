@@ -1,6 +1,8 @@
 using AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ST10369554_PROG6212_POE.Models;
+using ST10369554_PROG6212_POE.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ST10369554_PROG6212_POE.Controllers
@@ -8,10 +10,14 @@ namespace ST10369554_PROG6212_POE.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ClaimDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration configuration, ILogger<HomeController> logger, ClaimDbContext context)
         {
             _logger = logger;
+            _context = context;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -41,7 +47,7 @@ namespace ST10369554_PROG6212_POE.Controllers
                 //Save uploaded file
                 if (supportingDocument != null && supportingDocument.Length > 0)
                 {
-                    var allowedExtensions = new[] { ".pdf", ".docx", "xlsx" };
+                    var allowedExtensions = new[] { ".pdf", ".docx", "xlsx", ".jpg" };
                     var extension = Path.GetExtension(supportingDocument.FileName);
                     if (allowedExtensions.Contains(extension.ToLower()) && supportingDocument.Length < 5 * 1024 * 1024)// 5 MB size limit
                     { 
@@ -65,6 +71,7 @@ namespace ST10369554_PROG6212_POE.Controllers
                     claim.ClaimDate = DateTime.Now;
 
                     claims.Add(claim);
+                    _context.SaveChanges();
                     return RedirectToAction("AddedClaims");
                 }
 
