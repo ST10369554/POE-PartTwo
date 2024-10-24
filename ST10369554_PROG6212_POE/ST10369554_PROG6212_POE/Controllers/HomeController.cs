@@ -64,14 +64,15 @@ namespace ST10369554_PROG6212_POE.Controllers
                         return View(claim);
                     }
                 }
+                    claim.LecturerId = User.Identity.Name;
                     claim.ClaimId = claims.Count + 1;
                     claim.StatusId = 1;// Set StatusId to 'submitted' (pending)
                     claim.Total = claim.HoursWorked * claim.HourlyRate;
                     claim.GrandTotal = claim.Total;
                     claim.ClaimDate = DateTime.Now;
 
-                    claims.Add(claim);
-                    _context.SaveChanges();
+                    _context.Claims.Add(claim);
+                   
                     return RedirectToAction("AddedClaims");
                 }
 
@@ -82,6 +83,7 @@ namespace ST10369554_PROG6212_POE.Controllers
             public ActionResult AddedClaims()
             {
                 var lecturerClaims = claims.Where(c => c.LecturerId == User.Identity.Name).ToList();
+                //getClaims collect = new getClaims();
                 return View(lecturerClaims);
             }
 
@@ -100,7 +102,6 @@ namespace ST10369554_PROG6212_POE.Controllers
 
                 if (claim != null)
                 {
-                    claim.ManagerFeedback = managerComments;
                     claim.StatusId = approve ? 2 : 3; // 2 = approved, 3 = Rejected
 
                     return RedirectToAction("ApprovalPending");

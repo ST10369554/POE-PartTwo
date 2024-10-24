@@ -1,0 +1,45 @@
+﻿@model PROG
+
+@{
+    ViewBag.Title = "Claim Approval";
+}
+
+
+<h1>Pending Claims</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Lecturer Name</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
+            <th>Total</th>
+            <th>Notes</th>
+            <th>Supporting Document</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.LecturerName</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
+                <td>@(claim.HoursWorked * claim.HourlyRate)</td>
+                <td>@claim.Notes</td>
+                <td>
+                    <a href="@Url.Action("DownloadDocument", "Claim", new { claimId = claim.ClaimId })">
+                        View Document
+                    </a>
+                </td>
+                <td>@claim.Status</td>
+                <td>
+                    <button asp-action="ApproveClaim" asp-route-claimId="@claim.ClaimId">Approve</button>
+                    <button asp-action="RejectClaim" asp-route-claimId="@claim.ClaimId">Reject</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

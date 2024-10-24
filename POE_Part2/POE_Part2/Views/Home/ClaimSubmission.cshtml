@@ -1,0 +1,30 @@
+﻿@model POE_Part2.Models.LecturerClaim
+
+<h1>Submit Claim</h1>
+
+
+<!--validation summary incase of any errors -->
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="ClaimSubmission" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Hours Worked:</label>
+        <input type="number" asp-for="HoursWorked" required />
+        <span asp-validation-for="HoursWorked" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Hourly Rate:</label>
+        <input type="number" asp-for="HourlyRate" required />
+        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Notes:</label>
+        <textarea asp-for="Notes"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Supporting Document:</label>
+        <input type="file" name="SupportingDocument" accept=".pdf,.docx,.xlsx,.jpg" />
+    </div>
+    <button type="submit">Submit Claim</button>
+</form>

@@ -1,0 +1,28 @@
+﻿@model PROG6212_POE_Part2.Models.Claim
+
+@{
+    ViewBag.Title = "Claim Submission";
+}
+
+<h1>Submit Claim</h1>
+
+
+<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Hours Worked:</label>
+        <input type="number" asp-for="HoursWorked" required />
+    </div>
+    <div>
+        <label>Hourly Rate:</label>
+        <input type="number" asp-for="HourlyRate" required />
+    </div>
+    <div>
+        <label>Notes:</label>
+        <textarea asp-for="Notes"></textarea>
+    </div>
+    <div>
+        <label>Supporting Document:</label>
+        <input type="file" name="SupportingDocument" accept=".pdf,.docx,.xlsx, .jpg" />
+    </div>
+    <button type="submit">Submit Claim</button>
+</form>

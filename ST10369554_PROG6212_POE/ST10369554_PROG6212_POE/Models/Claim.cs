@@ -8,10 +8,9 @@ namespace ST10369554_PROG6212_POE.Models
         [Required]
         public string LecturerId { get; set; }
         public string LecturerName { get; set; }
-        public string LecturerSurname { get; set; }
+
         public string ManagerId { get; set; }
         public string ManegerName { get; set; }
-        public string ManagerSurname { get; set; }
 
 
         [Required]
@@ -32,7 +31,6 @@ namespace ST10369554_PROG6212_POE.Models
         public string SupportingDocumentPath { get; set; }
         public int StatusId { get; set; }
 
-        public string ManagerFeedback { get; set; }
     }
 
     }
